@@ -8,20 +8,20 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	$bgmid = intval($bgmid);
 	$epid = intval($epid);
 
-	if( !$bgmid || !$epid ) exit('-1');
+	if( !$bgmid || !$epid ) exit('-10');
 
 	global $SOURCE_LIST;
-	if( !in_array( $source, $SOURCE_LIST ) ) exit('-1');
+	if( !in_array( $source, $SOURCE_LIST ) ) exit('-10');
 
 	$db = new mysql();
 
 	# 先根据bgmid取到entryid
 	$eid = $db->get('entry', 'id', 'bgm='.$bgmid);
-	if( !$eid ) exit('1');
+	if( !$eid ) exit('-20');
 
 	# 然后根据eid和epid取地址
 	$bili_url = $db->get('ep', 'bili', 'eid='.$eid.' AND epid='.$epid);
-	if( !$eid ) exit('2');
+	if( !$eid ) exit('-30');
 
 	echo $bili_url;
 	return;
