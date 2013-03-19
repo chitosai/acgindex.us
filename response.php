@@ -35,9 +35,9 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 
 	# 存进memcache
 	if( $return_url != '' || $return_url != '-1')
-		$mc->set( $mc_key, $return_url, MC_EXIST_EXPIRE );
+		$mc->set( $mc_key, $return_url, 0, MC_EXIST_EXPIRE );
 	else
-		$mc->set( $mc_key, $return_url, MC_NOT_EXIST_EXPIRE );
+		$mc->set( $mc_key, $return_url, 0, MC_NOT_EXIST_EXPIRE );
 
 	echo $return_url;
 	return;
