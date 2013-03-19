@@ -15,7 +15,7 @@ class MC {
     private $mmc = null; 
     function __construct(){ 
         $this->mmc = new memcache(); 
-        $this->mmc->addServer( MEM_HOST, MEM_PORT );
+        $this->mmc->addServer( MC_HOST, MC_PORT );
     } 
     function set($key, $var, $expire=3600){ 
         if(!$this->mmc) return false; 
