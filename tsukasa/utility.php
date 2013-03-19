@@ -7,3 +7,34 @@ function utility_error($title, $detail = '') {
 	echo $title . ' <br><br>' . $detail;
 	exit();
 }
+
+// 
+// memcache操作类
+// 
+class MC { 
+    private $mmc = null; 
+    function __construct(){ 
+        $this->mmc = new memcache(); 
+        $this->mmc->addServer( MEM_HOST, MEM_PORT );
+    } 
+    function set($key, $var, $expire=3600){ 
+        if(!$this->mmc) return false; 
+        return $this->mmc->set($key, $var, $expire); 
+    } 
+    function get($key){ 
+        if(!$this->mmc) return false; 
+        return $this->mmc->get($key); 
+    } 
+    function incr($key, $value=1){ 
+        if(!$this->mmc) return false; 
+        return $this->mmc->increment($key, $value); 
+    } 
+    function decr($key, $value=1){ 
+        if(!$this->mmc) return false; 
+        return $this->mmc->decrement($key, $value); 
+    } 
+    function delete($key){ 
+        if(!$this->mmc) return false; 
+        return $this->mmc->delete($key); 
+    }
+}
