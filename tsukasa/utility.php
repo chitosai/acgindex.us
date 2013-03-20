@@ -17,9 +17,9 @@ class MC {
         $this->mmc = new memcache(); 
         $this->mmc->addServer( MC_HOST, MC_PORT );
     } 
-    function set($key, $var, $expire=3600){ 
+    function set($key, $var, $compress = MEMCACHE_COMPRESSED, $expire = 3600){ 
         if(!$this->mmc) return false; 
-        return $this->mmc->set($key, $var, $expire); 
+        return $this->mmc->set($key, $var, $compress, $expire); 
     } 
     function get($key){ 
         if(!$this->mmc) return false; 

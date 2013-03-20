@@ -1,7 +1,7 @@
 <?php
 
 include('tsukasa/utility.php');
-include('tsukasa/MySQL.php');
+include('tsukasa/statistics.php');
 
 function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	# 先处理输入
@@ -18,6 +18,8 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	$mc = new MC();
 	$r = $mc->get( $mc_key );
 	if( $r ) {
+		# 增加统计
+		statistics::request_incr();
 		echo $r;
 		return;
 	}
@@ -38,6 +40,9 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 		$mc->set( $mc_key, $return_url, 0, MC_EXIST_EXPIRE );
 	else
 		$mc->set( $mc_key, $return_url, 0, MC_NOT_EXIST_EXPIRE );
+
+	# 增加统计
+	statistics::request_incr();
 
 	echo $return_url;
 	return;
