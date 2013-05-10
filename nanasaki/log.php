@@ -14,12 +14,17 @@
 		if( file_exists($filename) ) {
 			echo '<h2>' . $date . '</h2>';
 			$file = file_get_contents( $filename );
-			$file = str_replace("\n", '<br>', $file);
-			$file = str_replace("<br>========================================================", '', $file);
-			$file = preg_replace('/\[\d{2}:\d{2}:\d{2}\] (?:update bili resources|END)<br>/', '', $file);
+			$file = preg_replace('/\[\d{2}:\d{2}:\d{2}\] (?:update bili resources|END)[\r\n]+/', '', $file);
+			// 高亮特殊状态
+			$file = preg_replace('/(\[\d{2}:\d{2}:\d{2}\] .+? NOT FOUND IN DATABASE !!!)/', '<strong>$1</strong>', $file);
+			$file = preg_replace('/(\[\d{2}:\d{2}:\d{2}\] EP DATA OF .+? NOT EXISTS !!!)/', '<strong>$1</strong>', $file);
+			// 去掉每次运行时的附加提示
+			$file = preg_replace('/=+[\r\n]+/', '', $file);
+			// 换行符替换为<br>
+			$file = preg_replace('/[\r\n]+/', '<br>', $file);
 			echo $file;
 		} else
-			echo "<br><br>######### {$filename} 不存在！！！";
+			echo "<br><br>############# {$filename} 不存在！！！";
 	}
 ?>
 </div>
