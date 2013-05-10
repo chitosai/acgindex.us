@@ -14,7 +14,7 @@
 		if( file_exists($filename) ) {
 			echo '<h2>' . $date . '</h2>';
 			$file = file_get_contents( $filename );
-			$file = str_replace("\r", '<br>', $file);
+			$file = str_replace("\n", '<br>', $file);
 			$file = str_replace("<br>========================================================", '', $file);
 			$file = preg_replace('/\[\d{2}:\d{2}:\d{2}\] (?:update bili resources|END)<br>/', '', $file);
 			echo $file;
