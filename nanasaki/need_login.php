@@ -7,7 +7,7 @@
 		<?php
 	}
 ?>
-<input type="text" id="password">
+<input type="password" id="password">
 <button id="login" onclick="do_login();">登录</button>
 <script src="crypto.sha256.js"></script>
 <script>
