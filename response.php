@@ -6,7 +6,7 @@ include('tsukasa/statistics.php');
 function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	# 先处理输入
 	$bgmid = intval($bgmid);
-	$epid = intval($epid);
+	$epid = floatval($epid);
 
 	if( !$bgmid || !$epid ) exit('-10');
 
@@ -28,11 +28,11 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	$db = new mysql();
 
 	# 先根据bgmid取到entryid
-	$eid = $db->get('entry', 'id', 'bgm='.$bgmid);
+	$eid = $db->get('entry', 'id', 'bgm=' . $bgmid);
 	if( !$eid ) exit('-20');
 
 	# 然后根据eid和epid取地址
-	$return_url = $db->get('ep', 'bili', 'eid='.$eid.' AND epid='.$epid);
+	$return_url = $db->get('ep', 'bili', 'eid=' . $eid . ' AND epid=' . $epid);
 	if( !$eid ) exit('-30');
 
 	# 存进memcache
