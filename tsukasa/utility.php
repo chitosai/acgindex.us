@@ -37,4 +37,8 @@ class MC {
         if(!$this->mmc) return false; 
         return $this->mmc->delete($key); 
     }
+    function flush(){
+        if(!$this->mmc) return false; 
+        return $this->mmc->flush();
+    }
 }

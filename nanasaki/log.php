@@ -1,8 +1,12 @@
-<?php if(!$login_ok) die(); ?>
+<?php 
+require_once('auth.php');
 
-<div id="log">
+function log_list() {
+	check_auth();
+?>
+	
+	<div id="log">
 <?php
-
 	for( $delta = 0; $delta <= 5; $delta++ ) {
 		// filename
 		$date = new DateTime();
@@ -29,4 +33,7 @@
 			echo "<br><br>############# {$filename} 不存在！！！";
 	}
 ?>
-</div>
+
+	</div>
+<?php
+}
