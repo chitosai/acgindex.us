@@ -5,7 +5,7 @@ require_once('auth.php');
 function cache_manager() {
 ?>
     <div id="cache_manager">
-        <a href="memcache.php?command=clear-all-cache">清空缓存</a>
+        <b>清空全站memcached缓存：</b><a href="memcache.php?command=clear-all-cache">清空</a>
     </div>
 <?php
 }
