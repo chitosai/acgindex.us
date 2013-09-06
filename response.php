@@ -14,14 +14,21 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	if( !in_array( $source, $SOURCE_LIST ) ) exit('-10');
 
 	# 先检查memcached
-	$mc_key = $bgmid . ':' . $epid . ':' . $source;
 	$mc = new MC();
+	$mc_key = sprintf(MC_KEY, $bgmid, $epid, $source);
 	$r = $mc->get( $mc_key );
 	if( $r ) {
 		# 增加统计
 		statistics::request_incr();
 		echo $r;
-		return;
+		return true;
+	}
+
+	# BT资源只使用memcache缓存，如果memcache里没有数据就重新抓
+	if( $source == 'bt' ) {
+        require('tsukasa/bt.php');
+        echo BT::update( $bgmid, $epid );
+		return true;
 	}
 
 	# 没有就查sql
@@ -33,7 +40,7 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 
 	# 然后根据eid和epid取地址
 	$return_url = $db->get('ep', 'bili', 'eid=' . $eid . ' AND epid=' . $epid);
-	if( !$eid ) exit('-30');
+	if( !$return_url ) exit('-30');
 
 	# 存进memcache
 	if( $return_url != '' || $return_url != '-1')
@@ -45,7 +52,7 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	statistics::request_incr();
 
 	echo $return_url;
-	return;
+	return true;
 }
 
 # 响应输入

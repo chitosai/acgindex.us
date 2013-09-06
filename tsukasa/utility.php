@@ -13,32 +13,37 @@ function utility_error($title, $detail = '') {
 // 
 class MC { 
     private $mmc = null; 
-    function __construct(){ 
+    function __construct() { 
         $this->mmc = new memcache(); 
-        $this->mmc->addServer( MC_HOST, MC_PORT );
+        $ret = $this->mmc->connect( MC_HOST, MC_PORT );
+        if( !$ret ) die('Memcache init failed');
     } 
-    function set($key, $var, $compress = MEMCACHE_COMPRESSED, $expire = 3600){ 
+    function set($key, $var, $compress = MEMCACHE_COMPRESSED, $expire = 3600) { 
         if(!$this->mmc) return false; 
         return $this->mmc->set($key, $var, $compress, $expire); 
     } 
-    function get($key){ 
+    function get($key) { 
         if(!$this->mmc) return false; 
         return $this->mmc->get($key); 
     } 
-    function incr($key, $value=1){ 
+    function incr($key, $value=1) { 
         if(!$this->mmc) return false; 
         return $this->mmc->increment($key, $value); 
     } 
-    function decr($key, $value=1){ 
+    function decr($key, $value=1) { 
         if(!$this->mmc) return false; 
         return $this->mmc->decrement($key, $value); 
     } 
-    function delete($key){ 
+    function delete($key) { 
         if(!$this->mmc) return false; 
         return $this->mmc->delete($key); 
     }
-    function flush(){
+    function flush() {
         if(!$this->mmc) return false; 
         return $this->mmc->flush();
+    }
+    function stats() {
+        if(!$this->mmc) return false;
+        var_dump($this->mmc->getStats());
     }
 }
