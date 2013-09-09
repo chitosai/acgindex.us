@@ -7,6 +7,7 @@ define('MC_NOT_EXIST_EXPIRE', 3600 * 3 );  # 3小时
 
 define('MC_BT_EXIST_EXPIRE', 3600 * 4);  # BT种子存在缓存4小时，就是至少每隔4小时应该重新检查一次种子数
 define('MC_BT_NOTE_EXIST_EXPIRE', 3600); # BT种子不存在缓存1小时...只是防止被人反复刷罢了
+define('MC_BT_SOURCE_ID', 1);            # BT的source_type_id
 
 define('MC_STATISTICS_REQUEST_COUNT', 'statistics_rc');  # 缓存在MC中的{请求数量}
 define('MC_STATISTICS_REQUEST_COUNT_MAX', 10);           # 缓存的{请求数量}写入数据库的阈值

@@ -17,8 +17,15 @@ class BT {
     static public function update( $bgmid, $epid ) {
         # 根据bgmid取中文名
         $db = new mysql();
-        $name = $db->get( 'entry', 'name_cn', 'bgm=' . $bgmid );
-        if( !$name ) return -1;
+        # 查找bgm收录的中文名及names表收录的别名
+        $names = $db->query(sprintf('SELECT `entry`.`name_cn`, `names`.`real_name` FROM `entry` LEFT JOIN `names` ON `entry`.`id` = `names`.`eid` AND `names`.`source` = %s WHERE `entry`.`bgm` = %s', MC_BT_SOURCE_ID, $bgmid));
+        if( !$names ) return -1;
+        # 如果有别名则选用别名，没有别名就直接用bgm的中文名
+        $names = $names[0];
+        if( $names['names']['real_name'] )
+            $name = $names['names']['real_name'];
+        else
+            $name = $names['entry']['name_cn'];
 
         # 准备发送请求
         if( $epid < 10 ) $str_epid = '0' . $epid;
