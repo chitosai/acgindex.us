@@ -14,7 +14,11 @@ class MC {
         $this->mmc = new memcache(); 
         $ret = $this->mmc->connect( MC_HOST, MC_PORT );
         if( !$ret ) die('Memcache init failed');
-    } 
+    }
+    function __destruct() {
+        if(!$this->mmc) return false;
+        return $this->mmc->close();
+    }
     function set($key, $var, $compress = MEMCACHE_COMPRESSED, $expire = 3600) { 
         if(!$this->mmc) return false; 
         return $this->mmc->set($key, $var, $compress, $expire); 
