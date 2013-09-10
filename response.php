@@ -33,14 +33,12 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 
 	# 没有就查sql
 	$db = new mysql();
+	$data = $db->query(sprintf("SELECT `ep`.`bili` FROM `ep` LEFT JOIN `entry` ON `ep`.`eid` = `entry`.`id` AND `ep`.`epid` = %s WHERE `entry`.`bgm` = %s", $epid, $bgmid));
 
-	# 先根据bgmid取到entryid
-	$eid = $db->get('entry', 'id', 'bgm=' . $bgmid);
-	if( !$eid ) exit('-20');
-
-	# 然后根据eid和epid取地址
-	$return_url = $db->get('ep', 'bili', 'eid=' . $eid . ' AND epid=' . $epid);
-	if( !$return_url ) exit('-30');
+	# 没有资源的情况
+	if( !$data ) $return_url = '';
+	# 找到资源的情况
+	else $return_url = $data[0]['ep']['bili'];
 
 	# 存进memcache
 	if( $return_url != '' || $return_url != '-1')
