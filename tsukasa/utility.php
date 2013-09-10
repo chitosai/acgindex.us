@@ -1,16 +1,12 @@
 <?php
 
-include('accounts.php');
-include('config.php');
+require_once('accounts.php');
+require_once('config.php');
 
-function utility_error($title, $detail = '') {
-	echo $title . ' <br><br>' . $detail;
-	exit();
-}
-
-// 
-// memcache操作类
-// 
+/* 
+ * memcache操作类
+ *
+ */
 class MC { 
     private $mmc = null; 
     function __construct() { 

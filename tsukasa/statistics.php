@@ -1,7 +1,7 @@
 <?php
 
-include('accounts.php');
-include('MySQL.php');
+require_once('accounts.php');
+require_once('MySQL.php');
 
 class statistics {
     static function request_incr() {
@@ -11,12 +11,11 @@ class statistics {
         $tmp = $mc->incr(MC_STATISTICS_REQUEST_COUNT);
         if(!$tmp) $mc->set(MC_STATISTICS_REQUEST_COUNT, 1, 0, MC_STATISTICS_EXPIRE);
         
-        # 到一定数值就写入mysql
+        # 缓存达到阈值就写入mysql
         if( $tmp >= MC_STATISTICS_REQUEST_COUNT_MAX ) {
             $mc->delete(MC_STATISTICS_REQUEST_COUNT);
             
             $db = new mysql();
-
             $r = $db->execute('UPDATE `statistics` SET `value`=`value`+'.MC_STATISTICS_REQUEST_COUNT_MAX.' WHERE `key`=\'request_total\'');
         }
     }

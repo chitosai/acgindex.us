@@ -14,7 +14,7 @@ class BT {
      * @ 找到资源的情况下返回资源地址
      * @ 没找到的情况下返回-1
      */
-    static public function update( $bgmid, $epid ) {
+    static function update( $bgmid, $epid ) {
         # 根据bgmid取中文名
         $db = new mysql();
         # 查找bgm收录的中文名及names表收录的别名

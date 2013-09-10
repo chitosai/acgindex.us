@@ -1,4 +1,5 @@
 User-agent: *
 
 Disallow: /tsukasa
+Disallow: /nanasaki
 Disallow: /cover

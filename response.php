@@ -13,7 +13,7 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	global $SOURCE_LIST;
 	if( !in_array( $source, $SOURCE_LIST ) ) exit('-10');
 
-	# 先检查memcached
+	# 检查memcached
 	$mc = new MC();
 	$mc_key = sprintf(MC_KEY, $bgmid, $epid, $source);
 	$r = $mc->get( $mc_key );
