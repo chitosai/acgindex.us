@@ -19,7 +19,7 @@ class BT {
         $db = new mysql();
         # 查找bgm收录的中文名及names表收录的别名
         $names = $db->query(sprintf('SELECT `entry`.`name_cn`, `names`.`real_name` FROM `entry` LEFT JOIN `names` ON `entry`.`id` = `names`.`eid` AND `names`.`source` = %s WHERE `entry`.`bgm` = %s', MC_BT_SOURCE_ID, $bgmid));
-        if( !$names ) return -1;
+        if( !$names ) return '-1';
         # 如果有别名则选用别名，没有别名就直接用bgm的中文名
         $names = $names[0];
         if( $names['names']['real_name'] )
@@ -49,7 +49,7 @@ class BT {
         } else {
         # 没有结果
             $mc->set( $mc_key, '-1', 0, MC_BT_EXIST_EXPIRE );
-            return -1;
+            return '-1';
         }
     }
 }

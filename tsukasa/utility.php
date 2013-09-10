@@ -67,3 +67,51 @@ class TIMER {
         return '<br>' . ($this->StopTime - $this->StartTime) . '(s)<br>';
     }
 }
+
+/*
+ * 负责向客户端返回数据
+ *
+ * @ 正常情况返回 {"status":"OK","value":"-1","from":"cache"} 格式的json
+ * @ 有错误时返回 {"status":"ERROR","value":"-10"} 格式
+ */
+class USER {
+    /*
+     * 正常返回值
+     * 
+     */
+    static function send( $value, $extra = null ) {
+        return USER::_send_( 'OK', $value, $extra );
+    }
+
+    /*
+     * 返回错误提示
+     * 
+     */
+    static function error( $value, $extra = null ) {
+        return USER::_send_( 'ERROR', $value, $extra );
+    }
+
+    /*
+     * 走你
+     * 
+     */
+    static function _send_( $status, $value, $extra = null ) {
+        # 包装基本参数
+        $return = array(
+            'status' => $status,
+            'value'  => $value,
+        );
+
+        # 如果有额外参数就带上
+        if( $extra ) 
+            $return = array_merge($return, $extra);
+
+        # 搞成json送出
+        echo json_encode($return);
+
+        # 所以增加统计
+        statistics::request_incr();
+
+        return true;
+    }
+}
