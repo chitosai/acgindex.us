@@ -5,18 +5,18 @@ require_once('MySQL.php');
 
 class statistics {
     static function request_incr() {
-        $mc = new MC();
+        $cache = new CACHE();
 
         # 缓存自增
-        $tmp = $mc->incr(MC_STATISTICS_REQUEST_COUNT);
-        if(!$tmp) $mc->set(MC_STATISTICS_REQUEST_COUNT, 1, 0, MC_STATISTICS_EXPIRE);
+        $tmp = $cache->incr(CACHE_STATISTICS_REQUEST_COUNT);
+        if(!$tmp) $cache->set(CACHE_STATISTICS_REQUEST_COUNT, 1, 0, CACHE_STATISTICS_EXPIRE);
         
         # 缓存达到阈值就写入mysql
-        if( $tmp >= MC_STATISTICS_REQUEST_COUNT_MAX ) {
-            $mc->delete(MC_STATISTICS_REQUEST_COUNT);
+        if( $tmp >= CACHE_STATISTICS_REQUEST_COUNT_MAX ) {
+            $cache->delete(CACHE_STATISTICS_REQUEST_COUNT);
             
             $db = new mysql();
-            $r = $db->execute('UPDATE `statistics` SET `value`=`value`+'.MC_STATISTICS_REQUEST_COUNT_MAX.' WHERE `key`=\'request_total\'');
+            $r = $db->execute('UPDATE `statistics` SET `value`=`value`+'.CACHE_STATISTICS_REQUEST_COUNT_MAX.' WHERE `key`=\'request_total\'');
         }
     }
 }

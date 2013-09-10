@@ -13,16 +13,15 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	if( !$bgmid || !$epid || !in_array( $source, $SOURCE_LIST ) ) 
 		return USER::error('-10');
 
-
-	# 检查memcache
-	GET::setCacheKey( sprintf(MC_KEY, $bgmid, $epid, $source) );
+	# 检查缓存
+	GET::set_cache_key( sprintf(CACHE_KEY, $bgmid, $epid, $source) );
 	$r = GET::cache( $bgmid, $epid, $source );
-	# memcache有缓存的话直接返回缓存值
+	# 有缓存的话直接返回缓存值
 	if( $r ) {
 		return USER::send( $r, array('from'=>'cache') );
 	}
 
-	# BT资源只使用memcache缓存，如果memcache里没有数据就重新抓
+	# BT资源只使用缓存，如果缓存里没有数据就重新抓
 	if( $source == 'bt' ) {
         $r = GET::bt( $bgmid, $epid );
         return USER::send( $r, array('from'=>'ktxp') );

@@ -11,14 +11,14 @@ require_once('utility.php');
  */
 class GET {
     # 缓存KEY
-    static private $mc_key = 'MC_KEY';
+    static private $cache_key = 'CACHE_KEY';
 
     /*
      * 设置缓存KEY的值
      * 
      */
-    static function setCacheKey( $key ) {
-        self::$mc_key = $key;
+    static function set_cache_key( $key ) {
+        self::$cache_key = $key;
     }
 
     /*
@@ -26,9 +26,9 @@ class GET {
      * 
      */
     static function cache( $bgmid, $epid, $source ) {
-        $mc = new MC();
-        $r = $mc->get( self::$mc_key );
-        unset($mc);
+        $cache = new CACHE();
+        $r = $cache->get( self::$cache_key );
+        unset($cache);
         return $r;
     }
 
@@ -46,13 +46,13 @@ class GET {
         # 找到资源的情况
         else $r = $data[0]['ep']['bili'];
 
-        # 存进memcache
-        $mc = new MC();
+        # 缓存
+        $cache = new CACHE();
         if( $r != '' || $r != '-1')
-            $mc->set( self::$mc_key, $r, 0, MC_EXIST_EXPIRE );
+            $cache->set( self::$cache_key, $r, 0, CACHE_EXIST_EXPIRE );
         else
-            $mc->set( self::$mc_key, '-1', 0, MC_NOT_EXIST_EXPIRE );
-        unset($mc);
+            $cache->set( self::$cache_key, '-1', 0, CACHE_NOT_EXIST_EXPIRE );
+        unset($cache);
 
         return $r;
     }
@@ -66,7 +66,7 @@ class GET {
         # 根据bgmid取中文名
         $db = new mysql();
         # 查找bgm收录的中文名及names表收录的别名
-        $names = $db->query(sprintf('SELECT `entry`.`name_cn`, `names`.`real_name` FROM `entry` LEFT JOIN `names` ON `entry`.`id` = `names`.`eid` AND `names`.`source` = %s WHERE `entry`.`bgm` = %s', MC_BT_SOURCE_ID, $bgmid));
+        $names = $db->query(sprintf('SELECT `entry`.`name_cn`, `names`.`real_name` FROM `entry` LEFT JOIN `names` ON `entry`.`id` = `names`.`eid` AND `names`.`source` = %s WHERE `entry`.`bgm` = %s', CACHE_BT_SOURCE_ID, $bgmid));
         if( !$names ) return '-1';
         # 如果有别名则选用别名，没有别名就直接用bgm的中文名
         $names = $names[0];
@@ -87,18 +87,18 @@ class GET {
         $find = preg_match("/<a href=\"\/down\/[\w\d\/]+\.torrent\" class=\"quick-down cmbg\"><\/a><a href=\"([\w\d\/\.]+)\" target=\"_blank\">/", $html, $match);
 
         # 准备写入缓存
-        $mc = new MC();
+        $cache = new CACHE();
 
         # 找到结果
         if( $find ) {
-            $mc->set( self::$mc_key, $match[1], 0, MC_BT_EXIST_EXPIRE );
+            $cache->set( self::$cache_key, $match[1], 0, CACHE_BT_EXIST_EXPIRE );
             $r = $match[1];
         } else {
         # 没有结果
-            $mc->set( self::$mc_key, '-1', 0, MC_BT_EXIST_EXPIRE );
+            $cache->set( self::$cache_key, '-1', 0, CACHE_BT_EXIST_EXPIRE );
             $r = '-1';
         }
-        unset($mc);
+        unset($cache);
 
         return $r;
     }

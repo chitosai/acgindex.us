@@ -16,8 +16,8 @@ function clear_all_cache() {
 
     require_once('../tsukasa/utility.php');
 
-    $mc = new MC();
-    $mc->flush();
+    $cache = new CACHE();
+    $cache->flush();
 
     echo '清空完毕';
 }

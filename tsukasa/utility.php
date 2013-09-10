@@ -4,16 +4,16 @@ require_once('accounts.php');
 require_once('config.php');
 
 /* 
- * memcache操作类
+ * 缓存操作类，现在用的是Memcache，不过考虑到以后可能会更换底层，所以封装的时候还是用CACHE这样抽象的名字。
+ * 以后换缓存的话只要保持方法的接口一致就OK了
  *
  */
-class MC { 
+class CACHE { 
     private $mmc = null; 
     function __construct() { 
-        if( !MC_ENABLE ) return;
+        if( !CACHE_ENABLE ) return;
         $this->mmc = new memcache(); 
-        $ret = $this->mmc->connect( MC_HOST, MC_PORT );
-        if( !$ret ) die('Memcache init failed');
+        $this->mmc->connect( CACHE_HOST, CACHE_PORT ) or die('Memcache init failed');
     }
     function __destruct() {
         if(!$this->mmc) return false;

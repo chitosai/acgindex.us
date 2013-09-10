@@ -6,9 +6,9 @@ define('DB_PASS', '');
 define('DB_NAME', '');
 define('DB_HOST', '');
 
-// Memcache
-define('MC_HOST', '');
-define('MC_PORT', 0);
+// 缓存配置
+define('CACHE_HOST', '');
+define('CACHE_PORT', 0);
 
 // 后台登录密码，嘛认为就自己用所以贪简单直接写在这里了
 define('ADMIN_PASS', '');
