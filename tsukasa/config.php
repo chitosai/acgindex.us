@@ -1,5 +1,6 @@
 <?php
 
+define('MC_ENABLE', true);   # 是否开启memcache
 define('MC_KEY', '%s:%s:%s'); # 通用的KEY格式
 
 define('MC_EXIST_EXPIRE', 3600 * 24 * 7);  # 一周

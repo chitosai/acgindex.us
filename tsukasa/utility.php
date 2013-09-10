@@ -10,6 +10,7 @@ require_once('config.php');
 class MC { 
     private $mmc = null; 
     function __construct() { 
+        if( !MC_ENABLE ) return;
         $this->mmc = new memcache(); 
         $ret = $this->mmc->connect( MC_HOST, MC_PORT );
         if( !$ret ) die('Memcache init failed');
