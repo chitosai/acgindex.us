@@ -72,6 +72,7 @@ class TIMER {
     }
 }
 
+
 /*
  * 负责向客户端返回数据
  *
@@ -112,9 +113,6 @@ class USER {
 
         # 搞成json送出
         echo json_encode($return);
-
-        # 所以增加统计
-        statistics::request_incr();
 
         return true;
     }

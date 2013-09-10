@@ -1,7 +1,7 @@
 <?php
 
 require_once('tsukasa/data.php');
-require_once('tsukasa/statistics.php');
+require_once('tsukasa/log.php');
 
 function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	global $SOURCE_LIST;
@@ -15,21 +15,28 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 
 	# 检查缓存
 	GET::set_cache_key( sprintf(CACHE_KEY, $bgmid, $epid, $source) );
-	$r = GET::cache( $bgmid, $epid, $source );
+	$value = GET::cache( $bgmid, $epid, $source );
 	# 有缓存的话直接返回缓存值
-	if( $r ) {
-		return USER::send( $r, array('from'=>'cache') );
+	if( $value ) {
+		USER::send( $value, array('from'=>'cache') );
+        LOG::add( $bgmid, $epid, $source, $value );
+		return true;
 	}
 
-	# BT资源只使用缓存，如果缓存里没有数据就重新抓
+	# BT资源只储存在缓存中，如果缓存里没有数据就重新抓
 	if( $source == 'bt' ) {
-        $r = GET::bt( $bgmid, $epid );
-        return USER::send( $r, array('from'=>'ktxp') );
+        $value = GET::bt( $bgmid, $epid );
+        USER::send( $value, array('from'=>'ktxp') );
+        LOG::add( $bgmid, $epid, $source, $value );
+		return true;
 	}
+
 	# 其他资源去查数据库
 	else {
-		$r = GET::db( $bgmid, $epid, $source );
-		return USER::send( $r, array('from'=>'db') );
+		$value = GET::db( $bgmid, $epid, $source );
+		USER::send( $value, array('from'=>'db') );
+        LOG::add( $bgmid, $epid, $source, $value );
+		return true;
 	}
 
 }

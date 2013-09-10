@@ -110,4 +110,7 @@ class mysql {
 		if ($table===null) return false;
 		return $this->execute("DELETE FROM $table WHERE $conditions");
 	}
+	function get_affected_rows() {
+		return mysql_affected_rows($this->con);
+	}
 }
