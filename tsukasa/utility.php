@@ -44,3 +44,26 @@ class MC {
         var_dump($this->mmc->getStats());
     }
 }
+
+
+/*
+ * 计时器
+ *
+ */
+class TIMER {
+    private $StartTime = 0;
+    private $StopTime = 0;
+    function get_microtime() {
+        list($usec, $sec) = explode(' ', microtime());
+        return ((float)$usec+(float)$sec);
+    }
+    function start() {
+        $this->StartTime = $this->get_microtime();
+    }
+    function stop() {
+        $this->StopTime = $this->get_microtime();
+    }
+    function spent() {
+        return '<br>' . ($this->StopTime - $this->StartTime) . '(s)<br>';
+    }
+}
