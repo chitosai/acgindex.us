@@ -15,6 +15,10 @@ class LOG {
      * @value 资源地址，没找到资源时为-1
      */
     static function add( $bgmid, $epid, $source, $value ) {
+        # 剔除监控宝的监控流量
+        if( $bgmid == 66491 && $epid == 1 && $source == 'bili' )
+            return false;
+
         # 判断是否是重复请求
         $cache = new CACHE();
         $prevent_repeat_key = sprintf( CACHE_REPEAT_DELAY_KEY, $_SERVER['REMOTE_ADDR'] );
