@@ -74,14 +74,28 @@ class TIMER {
 
 
 /*
- * 负责向客户端返回数据
+ * 负责向处理与用户相关的事务
  *
- * @ 正常情况返回 {"status":"OK","value":"-1","from":"cache"} 格式的json
- * @ 有错误时返回 {"status":"ERROR","value":"-10"} 格式
  */
 class USER {
     /*
+     * 检查两次访问间隔是否过短
+     * 
+     */
+    static function valid() {
+        $cache = new CACHE();
+        $prevent_repeat_key = sprintf( CACHE_REPEAT_DELAY_KEY, $_SERVER['REMOTE_ADDR'] );
+        if( $cache->get($prevent_repeat_key) ) {
+            return false;
+        } else {
+            $cache->set($prevent_repeat_key, 1, 0, CACHE_REPEAT_DELAY_TIME);
+            return true;
+        }
+    }
+
+    /*
      * 正常返回值
+     * @返回值类似 {"status":"OK","value":"-1","from":"cache"}
      * 
      */
     static function send( $value, $extra = null ) {
@@ -90,6 +104,7 @@ class USER {
 
     /*
      * 返回错误提示
+     * @返回值类似 {"status":"ERROR","value":"-10"}
      * 
      */
     static function error( $value, $extra = null ) {

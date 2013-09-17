@@ -19,14 +19,6 @@ class LOG {
         if( $bgmid == 66491 && $epid == 1 && $source == 'bili' )
             return false;
 
-        # 判断是否是重复请求
-        $cache = new CACHE();
-        $prevent_repeat_key = sprintf( CACHE_REPEAT_DELAY_KEY, $_SERVER['REMOTE_ADDR'] );
-        if( $cache->get($prevent_repeat_key) )
-            return false;
-        else
-            $cache->set($prevent_repeat_key, 1, 0, CACHE_REPEAT_DELAY_TIME);
-
         # 增加总点击量统计
         if( $value == '' || $value == '-1' ) {
             $status = 0;

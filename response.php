@@ -10,8 +10,16 @@ function get_ep_by_bgmid( $bgmid, $epid, $source ) {
 	$bgmid = intval($bgmid);
 	$epid = floatval($epid);
 
-	if( !$bgmid || !$epid || !in_array( $source, $SOURCE_LIST ) ) 
-		return USER::error('-10');
+	if( !$bgmid || !$epid || !in_array( $source, $SOURCE_LIST ) ) {
+		USER::error('-10');
+		return false;
+	}
+
+    # 判断两次请求是否间隔过短
+    if( !USER::valid() ) {
+    	USER::error('-20');
+    	return false;
+    }
 
 	# 检查缓存
 	GET::set_cache_key( sprintf(CACHE_KEY, $bgmid, $epid, $source) );
