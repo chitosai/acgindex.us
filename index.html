@@ -2,18 +2,27 @@
 <html>
 <head>
 	<title>简单易懂的现代魔法禁书目录</title>
+	<meta charset="utf-8">
+	<meta name="keywords" content="Bangumi资源扩展|动漫资源下载|动画在线观看|动画BT下载|动漫音乐试听">
+	<meta name="description" content="Bangumi资源扩展是为动漫收视进度管理网站Bangumi提供相关动画资源在线观看、BT下载以及音乐试听的Chrome扩展，今后还可能会提供小说、游戏的资源。">
 	<style>
 		body{
 			background: #202020;
 			color: #ccc;
+			font-size: 14px;
 			margin: 0;
 		}
 		#top{
 			background: #ff6969;
-			color: #202020;
-			font-weight: bold;
+			padding: .6em;
+			margin-bottom: 2em;
+		}
+		#top h1{
+			color: #fff;
+			font-size: 1.2em;
 			text-align: center;
-			padding: 10px;
+			line-height: 2;
+			margin: 0;
 		}
 		#top a{
 			color: #B10B0B;
@@ -25,14 +34,14 @@
 		li{
 			margin-bottom: 30px;
 		}
-		h1{
+		h3{
 			color: #fff;
 			font-size: 16px;
 			font-weight: bold;
 			line-height: 28px;
 			text-indent: 10px;
 		}
-		h1::before{
+		h3::before{
 			content: "●";
 			color: #ff6969;
 			font-size: 22px;
@@ -55,6 +64,11 @@
 			border-radius: 3px;
 			content: "!";
 			color: #333;
+			display: inline-block;
+			line-height: 1.2em;
+			text-align: center;
+			text-indent: 0;
+			width: .8em;
 			margin-right: 5px;
 			padding: 0 3px;
 		}
@@ -62,49 +76,50 @@
 </head>
 <body>
 	<div id="top">
-		目前ACGINDEX只允许通过Bangumi资源扩展访问，请<a href="http://bgm.tv/group/topic/22241" target="_blank">看这里</a>
+		<h1>Bangumi资源扩展是为动漫收视进度管理网站<a href="http://bgm.tv" target="_blank">Bangumi</a>提供动画资源在线观看、BT下载以及音乐试听的Chrome扩展，今后还可能会提供小说、游戏的资源。</h1>
+		<h1>您可以从<a href="https://chrome.google.com/webstore/detail/bangumi%E8%B5%84%E6%BA%90%E6%8F%92%E4%BB%B6/emomcngdjdddggdcnaamiaembciankch" target="_blank">Chrome在线商定</a>安装此扩展，如果您不知道如何使用<a href="http://bgm.tv/group/topic/22241" target="_blank">请看这里</a></h1>
 	</div>
 	<ul id="log">
 		<li>
-			<h1>2013-10-16</h1>
+			<h3>2013-10-16</h3>
 			<p>为音乐条目页面增加萌否电台/虾米/百度音乐快捷搜索链接</p>
 		</li>
 		<li>
-			<h1>2013-10-06</h1>
+			<h3>2013-10-06</h3>
 			<p>开始收录2013年10月新番</p>
 		</li>
 		<li>
-			<h1>2013-09-18</h1>
-			<p>Bangumi资源扩展已托管到<a href="https://chrome.google.com/webstore/detail/acgindex-for-bangumi/emomcngdjdddggdcnaamiaembciankch" target="_blank">Chrome商店</a></p>
+			<h3>2013-09-18</h3>
+			<p>Bangumi资源扩展已托管到<a href="https://chrome.google.com/webstore/detail/bangumi%E8%B5%84%E6%BA%90%E6%8F%92%E4%BB%B6/emomcngdjdddggdcnaamiaembciankch" target="_blank">Chrome在线商店</a></p>
 		</li>
 		<li>
-			<h1>2013-09-10</h1>
+			<h3>2013-09-10</h3>
 			<p>开始收录BT资源，目前的来源站为极影</p>
 			<p><b>请尽快将插件版本升级到最新（工具栏->工具->扩展程序->立即更新扩展程序），否则无法正常使用！</b></p>
 		</li>
 		<li>
-			<h1>2013-07-11</h1>
-			<p>支持带小数(x.5)的集数</p>
+			<h3>2013-07-11</h3>
+			<p>支持带小数(x.5)的话数</p>
 		</li>
 		<li>
-			<h1>2013-07-08</h1>
+			<h3>2013-07-08</h3>
 			<p>bili开始禁止日本IP访问，因为ACGINDEX部署在AWS东京节点上，因此所有访问都返回403。检查是否需要登录的功能失效</p>
 		</li>
 		<li>
-			<h1>2013-07-06</h1>
+			<h3>2013-07-06</h3>
 			<p>开始收录2013年7月新番</p>
 			<p>bili开始禁止没有appkey参数的api请求</p>
 		</li>
 		<li>
-			<h1>2013-04-30</h1>
+			<h3>2013-04-30</h3>
 			<p>后端迁移到AWS</p>
 		</li>
 		<li>
-			<h1>2013-04-04</h1>
+			<h3>2013-04-04</h3>
 			<p>开始收录2013年4月新番</p>
 		</li>
 		<li>
-			<h1>2013-03-12</h1>
+			<h3>2013-03-12</h3>
 			<p>第一个可用版本完工</p>
 		</li>
 	</ul>
