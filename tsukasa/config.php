@@ -6,7 +6,7 @@ define('CACHE_KEY', '%s:%s:%s'); # 缓存KEY格式
 
 # 缓存 - 从数据库取出的数据
 define('CACHE_EXIST_EXPIRE', 3600 * 24 * 7);  # 找到资源缓存一周
-define('CACHE_NOT_EXIST_EXPIRE', 3600 * 3 );  # 未找到资源缓存3小时
+define('CACHE_NOT_EXIST_EXPIRE', 3600 );  # 未找到资源缓存1小时
 
 # 缓存 - BT
 define('CACHE_BT_EXIST_EXPIRE', 3600 * 4);    # 找到资源缓存4小时，就是至少每隔4小时应该重新检查一次种子数
