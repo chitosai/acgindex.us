@@ -18,14 +18,19 @@ function log_list() {
 		if( file_exists($filename) ) {
 			echo '<h2>' . $date . '</h2>';
 			$file = file_get_contents( $filename );
+
+			// 去掉每次运行的开始/结束提示
 			$file = preg_replace('/\[\d{2}:\d{2}:\d{2}\] (?:update bili resources|END)[\r\n]+/', '', $file);
-			// 高亮特殊状态
-			$file = preg_replace('/(\[\d{2}:\d{2}:\d{2}\] .+? NOT FOUND IN DATABASE !!!)/', '<strong>$1</strong>', $file);
-			$file = preg_replace('/(\[\d{2}:\d{2}:\d{2}\] EP DATA OF .+? NOT EXISTS !!!)/', '<strong>$1</strong>', $file);
-			// 尚未更新这种提示总是容易重复出现，暗一点吧
-			$file = preg_replace('/(\[\d{2}:\d{2}:\d{2}\] .+? not released yet)/', '<span class="less-important">$1</span>', $file);
-			// 去掉每次运行时的附加提示
 			$file = preg_replace('/=+[\r\n]+/', '', $file);
+
+			// 高亮
+			$file = preg_replace('/(\[\d{2}:\d{2}:\d{2}\] \[NO ENTRY\]) name: ([^\r\n]+)/', 
+								 '<b>$1</b> name: <span class="easy-select">$2</span>', $file);
+			$file = preg_replace('/(\[\d{2}:\d{2}:\d{2}\] \[NO EP\]) id: (\d+) \| bid: (\d+) \| name: ([^\r\n]+)/', 
+								 '<b>$1</b> id: <span class="easy-select">$2</span> | bid: <span class="easy-select">$3</span> | name: <span class="easy-select">$4</span>', $file);
+			// 低亮
+			$file = preg_replace('/(\[\d{2}:\d{2}:\d{2}\] \[skip\] [^\r\n]+)/', '<span class="less-important">$1</span>', $file);
+
 			// 换行符替换为<br>
 			$file = preg_replace('/[\r\n]+/', '<br>', $file);
 			echo $file;
@@ -33,7 +38,29 @@ function log_list() {
 			echo "<br><br>############# {$filename} 不存在！！！";
 	}
 ?>
+	<script>
+		// 使.easy-select单击即可选中所有文本
+		function selectText(event) {
+		    var doc = document;
+		    var text = event.target;
 
+		    if (doc.body.createTextRange) { // ms
+		        var range = doc.body.createTextRange();
+		        range.moveToElementText(text);
+		        range.select();
+		    } else if (window.getSelection) { // moz, opera, webkit
+		        var selection = window.getSelection();            
+		        var range = doc.createRange();
+		        range.selectNodeContents(text);
+		        selection.removeAllRanges();
+		        selection.addRange(range);
+		    }
+		}
+		var nodes = document.querySelectorAll('.easy-select');
+		for( var i = 0; i < nodes.length; i++ ) {
+			nodes[i].addEventListener('click', selectText);
+		}
+	</script>
 	</div>
 <?php
 }
