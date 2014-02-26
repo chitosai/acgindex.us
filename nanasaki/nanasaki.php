@@ -20,7 +20,7 @@
 		            <?php
 		                function get_db_views() {
 		                    $db = new mysql();
-		                    $views_in_db = $db->query("SELECT `value` from `statistics` WHERE `key` = 'request_total'");
+		                    $views_in_db = $db->query("SELECT `value` from `statistics` WHERE `key` = 'statistics_rc'");
 		                    if( $views_in_db ) 
 		                        return $views_in_db[0]['statistics']['value'];
 		                    else 
