@@ -1,0 +1,4 @@
+        rewrite /bangumi/(\d+)/(\d+)/(\w+) /index.php?controller=bangumi&method=
+get&bgmid=$1&epid=$2&source=$3;
+        rewrite /haruka/b=(\d+)&e=(\d+)&source=(\w+) /index.php?controller=bangu
+mi&method=get&bgmid=$1&epid=$2&source=$3;
