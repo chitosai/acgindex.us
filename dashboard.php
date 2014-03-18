@@ -1,14 +1,14 @@
 <?
 
-if( !isset($_GET['controller']) || !isset($_GET['method']) ) {
-    die('ACGINDEX CORE -HARUKA-');
-}
-
 define('BASE_PATH', __DIR__);
 
 require 'config/config.php';
 require 'config/constant.php';
 require 'lib/autoload.php';
+
+if( !isset($_GET['method']) ) {
+    Core::r404();
+}
 
 # 任何请求都会用到缓存，于是先加载进来
 if( CACHE_ENABLE ) {
@@ -16,14 +16,13 @@ if( CACHE_ENABLE ) {
     Cache::init();
 }
 
+# 判断身份
+Core::Auth();
+
 # 调用方法
-$controller = $_GET['controller'];
+require 'controller/backend.php';
+$c = new Backend();
 $method = $_GET['method'];
-
-if( !file_exists( CONTROLLER_PATH . '/' . $controller . '.php' ) ) 
-    Core::r404();
-
-$c = new $controller();
 
 if( !method_exists( $c, $method ) )
     Core::r404();

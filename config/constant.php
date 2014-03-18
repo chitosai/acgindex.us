@@ -22,6 +22,11 @@ define('SHOW_LOG_OF_LAST_N_DAY', 5);          # 显示最近n天的日志
 # 地址常量
 define('KTXP_SEARCH', 'http://bt.ktxp.com/search.php?keyword=%s&sort_id=1&field=title&order=seeders'); # 极影搜索地址
 
+# 目录常量
+define('TEMPLATE_PATH', BASE_PATH . '/template');
+define('CONTROLLER_PATH', BASE_PATH . '/controller');
+define('STATIC_PATH', '/static');
+
 # 自动加载类的搜索目录
 $autoloads = array('lib', 'common', 'controller');
 

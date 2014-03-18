@@ -11,7 +11,7 @@ class DB {
         }
 	}
 
-    static function query($sql, $params) {
+    static function query($sql, $params = array()) {
         if( !self::$c ) self::init();
         $stmt = self::$c->prepare($sql);
         $stmt->execute($params);
