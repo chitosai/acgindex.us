@@ -1,6 +1,6 @@
 <?
 
-class CACHE { 
+class Cache { 
     static private $mmc = null; 
     static function init() { 
         self::$mmc = new memcache(); 

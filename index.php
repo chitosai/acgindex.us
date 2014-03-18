@@ -12,8 +12,8 @@ require 'lib/autoload.php';
 
 # 任何请求都会用到缓存，于是先加载进来
 if( CACHE_ENABLE ) {
-    require 'lib/cache.php';
-    CACHE::init();
+    require 'lib/Cache.php';
+    Cache::init();
 }
 
 $controller = $_GET['controller'];

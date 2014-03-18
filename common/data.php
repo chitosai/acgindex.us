@@ -24,7 +24,7 @@ class Data {
             }
         }
 
-        LOG::add($eid, $epid, $source, $value);
+        Log::add($eid, $epid, $source, $value);
         return $value;
     }
 
@@ -36,7 +36,7 @@ class Data {
         # 检查$cache_key，不存在的话就生成
         if( !self::$cache_key ) 
             self::$cache_key = sprintf(CACHE_KEY, $eid, $epid, $source);
-        return CACHE::get(self::$cache_key);
+        return Cache::get(self::$cache_key);
     }
 
     /*
@@ -54,9 +54,9 @@ class Data {
 
         # 缓存
         if( $r != '' || $r != '-1')
-            CACHE::set(self::$cache_key, $r, CACHE_EXIST_EXPIRE);
+            Cache::set(self::$cache_key, $r, CACHE_EXIST_EXPIRE);
         else
-            CACHE::set(self::$cache_key, '-1', CACHE_NOT_EXIST_EXPIRE);
+            Cache::set(self::$cache_key, '-1', CACHE_NOT_EXIST_EXPIRE);
 
         return $r;
     }
@@ -97,10 +97,10 @@ class Data {
         # 本次查询结果写入缓存
         # 找到结果
         if( $r && $r != '-1' ) {
-            CACHE::set( self::$cache_key, $r, CACHE_BT_EXIST_EXPIRE );
+            Cache::set( self::$cache_key, $r, CACHE_BT_EXIST_EXPIRE );
         } else {
         # 没有结果
-            CACHE::set( self::$cache_key, '-1', CACHE_BT_EXIST_EXPIRE );
+            Cache::set( self::$cache_key, '-1', CACHE_BT_EXIST_EXPIRE );
         }
         return $r;
     }

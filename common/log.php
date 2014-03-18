@@ -1,6 +1,6 @@
 <?php
 
-class LOG {
+class Log {
     /*
      * 记录一次请求
      * @status 出现错误时如参数不正确等为ERROR，正常时一律返回OK

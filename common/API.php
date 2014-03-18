@@ -14,7 +14,7 @@ class API {
         # 发起查询
         $value = Data::Get($eid, $epid, $source);
         # 输出
-        API::success($value);
+        self::success($value);
     }
 
     /**
@@ -24,9 +24,9 @@ class API {
      * @param [string]  $source [bili/bt/etc..]
      */
     static function valid($eid, $epid, $source) {
-        $valid = CORE::valid($eid, $epid, $source);
+        $valid = Core::valid($eid, $epid, $source);
         if( gettype($valid) == 'string' ) {
-            API::error($valid);
+            self::error($valid);
         }
     }
 
@@ -34,14 +34,14 @@ class API {
      * 向用户返回一个“完成”的json
      */
     static function success($value, $extra = null) {
-        API::send('OK', $value, $extra);
+        self::send('OK', $value, $extra);
     }
 
     /**
      * 向用户返回一个“错误”的json
      */
     static function error($value, $extra = null) {
-        API::send('ERROR', $value, $extra);
+        self::send('ERROR', $value, $extra);
     }
 
     /**
