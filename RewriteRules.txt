@@ -1,2 +1,7 @@
-        rewrite /bangumi/(\d+)/(\d+)/(\w+) /index.php?controller=bangumi&method=get&bgmid=$1&epid=$2&source=$3;
-        rewrite /haruka/b=(\d+)&e=(\d+)&source=(\w+) /index.php?controller=bangumi&method=get&bgmid=$1&epid=$2&source=$3;
+# FRONEND
+rewrite /bangumi/(\d+)/(\d+)/(\w+) /index.php?controller=bangumi&method=get&bgmid=$1&epid=$2&source=$3;
+rewrite /haruka/b=(\d+)&e=(\d+)&source=(\w+) /index.php?controller=bangumi&method=get&bgmid=$1&epid=$2&source=$3;
+
+# BACKEND
+rewrite /$ /template/404.php;
+rewrite /(\w+)/?$ /dashboard.php?method=$1;
