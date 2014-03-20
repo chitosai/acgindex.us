@@ -20,7 +20,7 @@ if( CACHE_ENABLE ) {
 Core::Auth();
 
 # 调用方法
-require 'controller/backend.php';
+require 'controller/Backend.php';
 $c = new Backend();
 $method = $_GET['method'];
 
