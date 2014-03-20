@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="cn">
 <head>
-    <? include '_head.html'; ?>
+    <? include '_head.php'; ?>
 </head>
 <body>
     <div class="content error">
@@ -32,6 +32,6 @@
         <? endif; ?>
     </div>
     
-    <? include '_footer.html'; ?>
+    <? include '_footer.php'; ?>
 </body>
 </html>

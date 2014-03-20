@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="cn">
 <head>
-    <? include '_head.html'; ?>
+    <? include '_head.php'; ?>
 </head>
 <body>
-    <? include '_header.html'; ?>
+    <? include '_header.php'; ?>
 
     <div class="content" id="log">
     <? foreach( $logs as $date => $content ): ?>
@@ -36,6 +36,6 @@
         }
     </script>
 
-    <? include '_footer.html'; ?>
+    <? include '_footer.php'; ?>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <title>太太我爱你啊！</title>
+    <title>太太我喜欢你啊！</title>
     <link rel="stylesheet" href="/static/css/backend.css">
 </head>
 <body>

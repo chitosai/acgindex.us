@@ -31,6 +31,12 @@ define('STATIC_PATH', '/static');
 # 自动加载类的搜索目录
 $autoloads = array('lib', 'common', 'controller');
 
+# 后台导航结构
+$BACKEND_NAV = array(
+    'index' => '首页',
+    'log'   => '抓取记录'
+);
+
 # 外部提交请求时$source这个字段的所有合法值
 $SOURCE_LIST = array(
     'bili' => 0, 

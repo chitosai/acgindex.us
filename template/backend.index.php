@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="cn">
 <head>
-    <? include '_head.html'; ?>
+    <? include '_head.php'; ?>
 </head>
 <body>
-    <? include '_header.html'; ?>
+    <? include '_header.php'; ?>
 
     <div class="content">
         <h1>总访问量</h1>
@@ -17,6 +17,6 @@
         <p><?=$today_view;?></p>
     </div>
     
-    <? include '_footer.html'; ?>
+    <? include '_footer.php'; ?>
 </body>
 </html>
