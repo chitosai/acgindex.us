@@ -1,3 +1,4 @@
+<? if( !defined('BASE_PATH') ) exit(); ?>
 <!doctype html>
 <html lang="cn">
 <head>
