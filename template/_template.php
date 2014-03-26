@@ -2,13 +2,13 @@
 <!doctype html>
 <html lang="cn">
 <head>
-    <? include '_head.html'; ?>
+    <? include '_head.php'; ?>
 </head>
 <body>
-    <? include '_header.html'; ?>
+    <? include '_header.php'; ?>
     <div class="content">
         
     </div>
-    <? include '_footer.html'; ?>
+    <? include '_footer.php'; ?>
 </body>
 </html>

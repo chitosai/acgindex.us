@@ -4,7 +4,7 @@ class Backend {
     /**
      * 虽然叫首页但其实都是统计数据
      */
-    static function index() {
+    static function Index() {
         $data = array();
 
         # 总点击量
@@ -12,8 +12,7 @@ class Backend {
         $data['total_view'] = intval($r[0]['COUNT(*)']);
 
         # 周点击量
-        $r = DB::query('SELECT COUNT(*) FROM `log` WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY)
- <= date(`timestamp`)');
+        $r = DB::query('SELECT COUNT(*) FROM `log` WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(`timestamp`)');
         $data['weekly_view'] = intval($r[0]['COUNT(*)']);
 
         # 昨日点击
@@ -30,7 +29,7 @@ class Backend {
     /**
      * 后台Python端的抓取LOG
      */
-    static function log() {
+    static function Log() {
         $data = array('logs' => array());
 
         for( $delta = 0; $delta <= 5; $delta++ ) {
@@ -66,5 +65,44 @@ class Backend {
         }
 
         Core::render('backend.log', $data);
+    }
+
+    /**
+     * 手动关联资源
+     */
+    static function AddResource() {
+        extract($_REQUEST);
+        $data = array('message' => '');
+
+        # 检查输入
+        if( isset($eid) && isset($bili) ) {
+            $eid = intval($eid);
+            $bili = intval($bili);
+            
+            if( $eid > 0 && $bili > 0 ) {
+                # 开始插入数据
+                # 检查总话数
+                $r = DB::query('SELECT `total` FROM `entry` WHERE `id` = ?', array($eid));
+                if( $r ) {
+                    $total = $r[0]['total'];
+                }
+
+                # 写入条目数据
+                for( $i = 1; $i <= $total; $i++ ) {
+                    DB::update('ep', array(
+                        'bili' => "{$bili}/index_{$i}.html"
+                    ), array(
+                        'eid'  => $eid,
+                        'epid' => $i
+                    ));
+                }
+
+                $data['message'] = '更新完毕';
+            }
+        }
+
+        # 
+        Core::render('backend.addresource', $data);
+            
     }
 }

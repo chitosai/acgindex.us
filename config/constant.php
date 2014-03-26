@@ -33,8 +33,9 @@ $autoloads = array('lib', 'common', 'controller');
 
 # 后台导航结构
 $BACKEND_NAV = array(
-    'index' => '首页',
-    'log'   => '抓取记录'
+    'index'       => '统计',
+    'log'         => '抓取记录',
+    'addresource' => '关联资源'
 );
 
 # 外部提交请求时$source这个字段的所有合法值

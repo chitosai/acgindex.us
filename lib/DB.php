@@ -34,4 +34,22 @@ class DB {
         $r = self::$c->lastInsertId();
         return $r;
     }
+
+    static function update($table, $action, $condition) {
+        $action_array = array();
+        foreach( $action as $key => $value ) {
+            array_push($action_array, "`{$key}` = ?");
+        }
+        $action_sql = implode(' AND ', $action_array);
+
+        $condition_array = array();
+        foreach( $condition as $key => $value ) {
+            array_push($condition_array, "`{$key}` = '{$value}'");
+        }
+        $condition_sql = implode(' AND ', $condition_array);
+
+        $sql = "UPDATE `{$table}` SET {$action_sql} WHERE {$condition_sql}";
+        $stmt = self::$c->prepare($sql);
+        $stmt->execute(array_values($action));
+    }
 }

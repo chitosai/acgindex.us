@@ -10,7 +10,7 @@
         <p><?=$message;?></p>
         <? if( isset($show_login) ): ?>
             <input type="password" id="password"><!--
-            --><a id="login" href="<?=$redirect_url;?>">登录</a>
+            --><a id="login" class="submit" href="<?=$redirect_url;?>">登录</a>
         <script src="<?=STATIC_PATH;?>/js/crypto.sha256.js"></script>
         <script>
             document.querySelector('#login').addEventListener('click', do_login);
