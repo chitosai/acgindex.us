@@ -23,7 +23,7 @@ class Backend {
         $r = DB::query('SELECT COUNT(*) FROM `log` WHERE CURDATE() = date(`timestamp`)');
         $data['today_view'] = intval($r[0]['COUNT(*)']);
         
-        Core::render('backend.index', $data);
+        self::render('index', $data);
     }
 
     /**
@@ -64,7 +64,7 @@ class Backend {
             }
         }
 
-        Core::render('backend.log', $data);
+        self::render('log', $data);
     }
 
     /**
@@ -102,7 +102,16 @@ class Backend {
         }
 
         # 
-        Core::render('backend.addresource', $data);
-            
+        self::render('addresource', $data);
+    }
+
+    /**
+     * 渲染后台页面
+     */
+    static function render($template, $data = array()) {
+        global $BACKEND_NAV;
+        $data['type'] = 'backend';
+        $data['nav']  = $BACKEND_NAV;
+        Core::render('backend/' . $template, $data);
     }
 }

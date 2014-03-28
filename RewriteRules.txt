@@ -1,6 +1,8 @@
 # FRONEND
 rewrite /bangumi/(\d+)/(\d+)/(\w+) /index.php?controller=bangumi&method=get&bgmid=$1&epid=$2&source=$3;
 rewrite /haruka/b=(\d+)&e=(\d+)&source=(\w+) /index.php?controller=bangumi&method=get&bgmid=$1&epid=$2&source=$3;
+rewrite ^/$ /index.php?controller=frontend&method=index;
+rewrite /search/(.+) /index.php?controller=frontend&method=search&keyword=$1;
 
 # BACKEND
 rewrite /$ /template/404.php;

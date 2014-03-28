@@ -2,10 +2,10 @@
 <!doctype html>
 <html lang="cn">
 <head>
-    <? include '_head.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'head.php'; ?>
 </head>
 <body>
-    <? include '_header.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'header.php'; ?>
 
     <div class="content">
         <h1>总访问量</h1>
@@ -18,6 +18,6 @@
         <p><?=$today_view;?></p>
     </div>
     
-    <? include '_footer.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'footer.php'; ?>
 </body>
 </html>

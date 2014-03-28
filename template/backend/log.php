@@ -2,10 +2,10 @@
 <!doctype html>
 <html lang="cn">
 <head>
-    <? include '_head.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'head.php'; ?>
 </head>
 <body>
-    <? include '_header.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'header.php'; ?>
 
     <div class="content" id="log">
     <? foreach( $logs as $date => $content ): ?>
@@ -37,6 +37,6 @@
         }
     </script>
 
-    <? include '_footer.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'footer.php'; ?>
 </body>
 </html>

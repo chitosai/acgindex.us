@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="cn">
 <head>
-    <? include '_head.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'head.php'; ?>
 </head>
 <body>
     <div class="content error">
@@ -33,6 +33,6 @@
         <? endif; ?>
     </div>
     
-    <? include '_footer.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'footer.php'; ?>
 </body>
 </html>

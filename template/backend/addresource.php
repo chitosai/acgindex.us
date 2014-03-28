@@ -2,10 +2,10 @@
 <!doctype html>
 <html lang="cn">
 <head>
-    <? include '_head.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'head.php'; ?>
 </head>
 <body>
-    <? include '_header.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'header.php'; ?>
     <div class="content">
         <div>
             <form action="/addresource">
@@ -29,6 +29,6 @@
             </form>
         </div>
     </div>
-    <? include '_footer.php'; ?>
+    <? include TEMPLATE_COMMON_PATH . 'footer.php'; ?>
 </body>
 </html>
