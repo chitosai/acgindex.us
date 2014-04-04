@@ -10,10 +10,16 @@ class Backend {
         # 总点击量
         $r = DB::query('SELECT COUNT(*) FROM `log`');
         $data['total_view'] = intval($r[0]['COUNT(*)']);
+        # 平均
+        $r = DB::query('SELECT UNIX_TIMESTAMP(`timestamp`) AS \'time\' FROM `log` ORDER BY `timestamp` ASC LIMIT 1');
+        $data['total_elapsed'] = intval((time() - intval($r[0]['time']))/3600/24);
+        $data['total_avg'] = intval($data['total_view'] / $data['total_elapsed']);
 
         # 周点击量
         $r = DB::query('SELECT COUNT(*) FROM `log` WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(`timestamp`)');
         $data['weekly_view'] = intval($r[0]['COUNT(*)']);
+        # 周平均
+        $data['weekly_avg'] = intval($data['weekly_view'] / 7);
 
         # 昨日点击
         $r = DB::query('SELECT COUNT(*) FROM `log` WHERE CURDATE() - date(`timestamp`) = 1');
