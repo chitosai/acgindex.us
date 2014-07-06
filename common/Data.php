@@ -53,7 +53,7 @@ class Data {
         else $r = $data[0]['bili'];
 
         # 缓存
-        if( $r != '' || $r != '-1')
+        if( $r != '' && $r != '-1')
             Cache::set(self::$cache_key, $r, CACHE_EXIST_EXPIRE);
         else
             Cache::set(self::$cache_key, '-1', CACHE_NOT_EXIST_EXPIRE);
